@@ -1,2 +1,2 @@
 # QWT-Plot
-QWT Module for Typing Analysis Project
+A QWT module for the Typing Analysis project
