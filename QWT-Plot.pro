@@ -17,15 +17,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    curvewrapper.cpp \
     functiontable.cpp \
     main.cpp \
-    mainwindow.cpp \
-    panner.cpp
+    mainwindow.cpp
 
 HEADERS += \
+    curvewrapper.h \
     functiontable.h \
     mainwindow.h \
-    panner.h
+    modifiedcheckbox.h
 
 FORMS += \
     mainwindow.ui

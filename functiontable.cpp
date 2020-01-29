@@ -1,10 +1,5 @@
 #include "functiontable.h"
 
-struct FT {
-    funcptr_t function;
-    string name;
-};
-
 const FT function_table[] = {
     {sin, "sin"},
     {cos, "cos"},

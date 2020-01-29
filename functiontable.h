@@ -10,7 +10,10 @@ using std::string;
 
 typedef double (*funcptr_t)(double);
 
-struct FT;
+struct FT {
+    funcptr_t function = NULL;
+    string name;
+};
 
 funcptr_t search_function(const string& name);
 

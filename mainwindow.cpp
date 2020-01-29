@@ -1,34 +1,40 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget* parent): QMainWindow(parent), ui(new Ui::MainWindow) {
+MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
+    vbox = make_unique<QVBoxLayout>();
+    ui->box->setLayout(vbox.get());
 
-    setup_curve("f(x)");
     setup_legend();
     setup_grid();
     setup_magnifier();
     setup_panner();
     //setup_zoomer(); TO DO: Fix conflicting controls.
 
-    // Example
-//    const int SAMPLE_SIZE = 10000;
-
-//    vector<double> x(SAMPLE_SIZE);
-//    vector<double> y(SAMPLE_SIZE);
-
-//    double step = 0.01;
-
-//    for (int i = 0; i < SAMPLE_SIZE; ++i) {
-//        x[i] = i * step;
-//        y[i] = x[i] * x[i];
-//    }
-
-//    draw_vector(x, y);
-
-    funcptr_t f = search_function("e");
+    // Examples
+    funcptr_t f = search_function("cos");
     if (f) {
-        draw_function(f, -10, 10, 0.001);
+        draw_function(-10, 10, 0.001, "cos(x)", Qt::red, f);
+    }
+
+    const int SAMPLE_SIZE = 10000;
+
+    vector<double> x(SAMPLE_SIZE);
+    vector<double> y(SAMPLE_SIZE);
+
+    double step = 0.01;
+
+    for (int i = 0; i < SAMPLE_SIZE; ++i) {
+        x[i] = i * step;
+        y[i] = x[i] * x[i];
+    }
+
+    draw_vector(x, y, "x^2", Qt::blue);
+
+    f = search_function("sqrt");
+    if (f) {
+        draw_function(-10, 10, 0.001, "sqrt(x)", Qt::green, f);
     }
 }
 
@@ -36,7 +42,8 @@ MainWindow::~MainWindow() {
     delete ui;
 }
 
-void MainWindow::draw_function(funcptr_t f, double begin, double end, double step) {
+void MainWindow::draw_function(double begin, double end, double step,
+                               const string& name, const QColor& color, funcptr_t f) {
     int size = abs(end - begin) / step;
     vector<double> x(size);
     vector<double> y(size);
@@ -50,20 +57,47 @@ void MainWindow::draw_function(funcptr_t f, double begin, double end, double ste
         }
     }
 
-    draw_vector(x, y);
+    draw_vector(x, y, name, color, f);
 }
 
-void MainWindow::draw_vector(const vector<double>& x, const vector<double>& y) {
-    curve->setSamples(x.data(), y.data(), min(x.size(), y.size()));
+void MainWindow::draw_vector(const vector<double>& x, const vector<double>& y,
+                             const string& name, const QColor& color, funcptr_t f) {
+    setup_curve(name, color, f);
+    curves.back()->curve->setSamples(x.data(), y.data(), min(x.size(), y.size()));
     ui->qwtPlot->replot();
 }
 
-void MainWindow::setup_curve(const string& name) {
-    curve = make_unique<QwtPlotCurve>(name.data());
-    curve->setRenderHint(QwtPlotItem::RenderAntialiased);
-    curve->setPen(QPen(Qt::red));
-    curve->setStyle(QwtPlotCurve::Lines);
-    curve->attach(ui->qwtPlot);
+void MainWindow::process_checkbox() {
+    ModifiedCheckBox* checkbox = static_cast<ModifiedCheckBox*>(sender());
+    int id = checkbox->id;
+
+    if (checkbox->isChecked()) {
+        curves[id]->curve->show();
+    } else {
+        curves[id]->curve->hide();
+    }
+
+    ui->qwtPlot->replot();
+}
+
+void MainWindow::setup_curve(const string& name, const QColor& color, funcptr_t f) {
+    curves.emplace_back(make_unique<CurveWrapper>());
+    auto& elem = curves.back();
+
+    elem->id = curves.size() - 1;
+    elem->curve->setTitle(name.data());
+    elem->curve->setRenderHint(QwtPlotItem::RenderAntialiased);
+    elem->curve->setStyle(QwtPlotCurve::Lines);
+    elem->curve->setPen(color);
+    elem->function = f;
+    elem->curve->attach(ui->qwtPlot);
+
+    elem->checkbox->setChecked(true);
+    elem->checkbox->setText(name.data());
+    elem->checkbox->id = curves.back()->id;
+    vbox->addWidget(elem->checkbox.get());
+
+    connect(elem->checkbox.get(), &QCheckBox::stateChanged, this, &MainWindow::process_checkbox);
 }
 
 void MainWindow::setup_grid() {
@@ -77,7 +111,7 @@ void MainWindow::setup_grid() {
 
 void MainWindow::setup_legend() {
     legend = make_unique<QwtLegend>();
-    ui->qwtPlot->insertLegend(legend.get(), QwtPlot::RightLegend);
+    ui->qwtPlot->insertLegend(legend.get(), QwtPlot::BottomLegend);
     ui->qwtPlot->setCanvasBackground(Qt::white);
     ui->qwtPlot->setAxisTitle(QwtPlot::xBottom, "X");
     ui->qwtPlot->setAxisTitle(QwtPlot::yLeft, "Y");
@@ -90,7 +124,7 @@ void MainWindow::setup_magnifier() {
 }
 
 void MainWindow::setup_panner() {
-    panner = make_unique<Panner>(ui->qwtPlot->canvas());
+    panner = make_unique<QwtPlotPanner>(ui->qwtPlot->canvas());
 }
 
 void MainWindow::setup_zoomer() {
