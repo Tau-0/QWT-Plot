@@ -2,6 +2,7 @@
 #define CURVEWRAPPER_H
 
 #include <QCheckBox>
+#include <QColor>
 
 #include <qwt_plot_curve.h>
 
@@ -19,8 +20,13 @@ struct CurveWrapper {
     unique_ptr<ModifiedCheckBox> checkbox;
     unique_ptr<QwtPlotCurve> curve;
     vector<unique_ptr<QwtPlotCurve>> fillers;
+
+    int alpha = 50;
+    unique_ptr<QColor> color;
+
     funcptr_t function;
     int id;
+    string name;
 
     CurveWrapper();
 };

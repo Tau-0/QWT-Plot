@@ -58,7 +58,8 @@ class MainWindow : public QMainWindow {
                        const string& name, const QColor& color, funcptr_t f);
     void draw_vector(const vector<double>& x, const vector<double>& y,
                      const string& name, const QColor& color = Qt::red, funcptr_t f = NULL);
-    void fill_interval(funcptr_t f, double begin, double end, double step);
+    void fill_interval(double begin, double end, double step, int id = -1,
+                       const string& name = "");
 
     void process_checkbox();
 
