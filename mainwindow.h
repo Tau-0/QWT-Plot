@@ -21,7 +21,9 @@
 #include <vector>
 
 #include "curvewrapper.h"
+#include "data.h"
 #include "functiontable.h"
+#include "plotter.h"
 
 using std::make_unique;
 using std::min;
@@ -39,35 +41,26 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
- private:
+private:
     Ui::MainWindow* ui;
     unique_ptr<QVBoxLayout> vbox;
+    unique_ptr<Plotter> plotter;
+    unique_ptr<Data> data;
 
-    vector<unique_ptr<CurveWrapper>> curves;
-    unique_ptr<QwtPlotGrid> grid;
-    unique_ptr<QwtLegend> legend;
-    unique_ptr<QwtPlotMagnifier> magnifier;
-    unique_ptr<QwtPlotPanner> panner;
-    unique_ptr<QwtPlotZoomer> zoomer;
-
- public:
+public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
-    void draw_function(double begin, double end, double step,
-                       const string& name, const QColor& color, funcptr_t f);
-    void draw_vector(const vector<double>& x, const vector<double>& y,
-                     const string& name, const QColor& color = Qt::red, funcptr_t f = NULL);
-    void fill_interval(double begin, double end, double step, int id = -1,
-                       const string& name = "");
+    QwtPlot* get_plotter_source() const;
+//    void draw_function(double begin, double end, double step,
+//                       const string& name, const QColor& color, funcptr_t f);
+//    void draw_vector(const vector<double>& x, const vector<double>& y,
+//                     const string& name, const QColor& color = Qt::red, funcptr_t f = NULL);
+//    void fill_interval(double begin, double end, double step, int id = -1,
+//                       const string& name = "");
 
-    void process_checkbox();
+//    void process_checkbox();
 
-    void setup_curve(const string& name, const QColor& color, funcptr_t f = NULL);
-    void setup_grid();
-    void setup_legend();
-    void setup_magnifier();
-    void setup_panner();
-    void setup_zoomer();
+//    void setup_curve(const string& name, const QColor& color, funcptr_t f = NULL);
 };
 #endif // MAINWINDOW_H

@@ -1,4 +1,4 @@
-QT       += core gui
+QT += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -18,15 +18,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     curvewrapper.cpp \
+    data.cpp \
     functiontable.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    plotter.cpp
 
 HEADERS += \
     curvewrapper.h \
+    data.h \
     functiontable.h \
     mainwindow.h \
-    modifiedcheckbox.h
+    modifiedcheckbox.h \
+    plotter.h
 
 FORMS += \
     mainwindow.ui

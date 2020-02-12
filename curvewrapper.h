@@ -16,7 +16,8 @@ using std::make_unique;
 using std::vector;
 using std::unique_ptr;
 
-struct CurveWrapper {
+class CurveWrapper {
+private:
     unique_ptr<ModifiedCheckBox> checkbox;
     unique_ptr<QwtPlotCurve> curve;
     vector<unique_ptr<QwtPlotCurve>> fillers;
@@ -24,10 +25,11 @@ struct CurveWrapper {
     int alpha = 50;
     unique_ptr<QColor> color;
 
-    funcptr_t function;
+    FunctionPtr function;
     int id;
     string name;
 
+public:
     CurveWrapper();
 };
 
