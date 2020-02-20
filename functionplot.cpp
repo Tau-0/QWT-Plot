@@ -1,7 +1,6 @@
-#include "curvewrapper.h"
+#include "functionplot.h"
 
-CurveWrapper::CurveWrapper() {
+FunctionPlot::FunctionPlot() {
     checkbox = make_unique<ModifiedCheckBox>();
     curve = make_unique<QwtPlotCurve>();
-    function = nullptr;
 }

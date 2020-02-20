@@ -2,7 +2,6 @@
 #define MODIFIEDCHECKBOX_H
 
 #include <QCheckBox>
-#include <QObject>
 
 class ModifiedCheckBox : public QCheckBox {
     Q_OBJECT

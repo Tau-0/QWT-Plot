@@ -5,7 +5,27 @@ Plotter::Plotter(QwtPlot* _source) : source(_source) {
     set_legend();
     set_magnifier();
     set_panner();
-    set_zoomer();
+    //set_zoomer();
+}
+
+void Plotter::set_curve(QwtPlotCurve* curve, const CurveData& curve_data) {
+    curve->setRawSamples(curve_data.get_X().data(), curve_data.get_Y().data(), curve_data.get_X().size());
+    curve->setRenderHint(QwtPlotItem::RenderAntialiased);
+    curve->setStyle(QwtPlotCurve::Lines);
+    curve->setTitle(curve_data.get_name().data());
+    curve->setPen(curve_data.get_color());
+    curve->attach(source);
+    source->replot();
+}
+
+void Plotter::set_function1(const CurveData& curve_data) {
+    auto curve = plot1.get_curve();
+    set_curve(curve, curve_data);
+}
+
+void Plotter::set_function2(const CurveData& curve_data) {
+    auto curve = plot2.get_curve();
+    set_curve(curve, curve_data);
 }
 
 void Plotter::set_grid() {

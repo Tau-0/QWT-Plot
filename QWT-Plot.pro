@@ -17,17 +17,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    curvewrapper.cpp \
+    curvedata.cpp \
     data.cpp \
+    functionplot.cpp \
     functiontable.cpp \
+    functionwithintervalsplot.cpp \
     main.cpp \
     mainwindow.cpp \
     plotter.cpp
 
 HEADERS += \
-    curvewrapper.h \
+    curvedata.h \
     data.h \
+    functionplot.h \
     functiontable.h \
+    functionwithintervalsplot.h \
     mainwindow.h \
     modifiedcheckbox.h \
     plotter.h
