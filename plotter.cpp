@@ -5,7 +5,7 @@ Plotter::Plotter(QwtPlot* _source) : source(_source) {
     set_legend();
     set_magnifier();
     set_panner();
-    //set_zoomer();
+    set_zoomer();
 }
 
 void Plotter::set_curve(QwtPlotCurve* curve, const CurveData& curve_data) {
@@ -54,10 +54,14 @@ void Plotter::set_magnifier() {
 
 void Plotter::set_panner() {
     panner = make_unique<QwtPlotPanner>(source->canvas());
+    panner->setMouseButton(Qt::MidButton);
 }
 
 void Plotter::set_zoomer() {
-    zoomer = make_unique<QwtPlotZoomer>(source->canvas());
-    zoomer->setRubberBandPen(QPen(Qt::green));
+    zoomer = make_unique<Zoomer>(source->canvas());
+    zoomer->setRubberBandPen(QPen(Qt::darkBlue));
+    zoomer->setTrackerPen(QPen(Qt::darkBlue));
+    zoomer->setMousePattern(QwtEventPattern::MouseSelect2, Qt::RightButton, Qt::ControlModifier);
+    zoomer->setMousePattern(QwtEventPattern::MouseSelect3, Qt::RightButton);
 }
 

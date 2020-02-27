@@ -6,14 +6,14 @@
 #include <qwt_plot_grid.h>
 #include <qwt_plot_magnifier.h>
 #include <qwt_plot_panner.h>
-#include <qwt_plot_zoomer.h>
 
 #include <memory>
 #include <vector>
 
-#include <curvedata.h>
-#include <functionwithintervalsplot.h>
-#include <functiontable.h>
+#include "curvedata.h"
+#include "functionwithintervalsplot.h"
+#include "functiontable.h"
+#include "zoomer.h"
 
 using std::make_unique;
 using std::unique_ptr;
@@ -27,7 +27,7 @@ private:
     unique_ptr<QwtLegend> legend;
     unique_ptr<QwtPlotMagnifier> magnifier;
     unique_ptr<QwtPlotPanner> panner;
-    unique_ptr<QwtPlotZoomer> zoomer;
+    unique_ptr<Zoomer> zoomer;
 
     FunctionPlot plot1;
     FunctionPlot plot2;
@@ -49,3 +49,8 @@ public:
 };
 
 #endif // PLOTTER_H
+
+// LeftButton for the zooming
+// MidButton for the panning
+// RightButton: zoom out by 1
+// Ctrl+RighButton: zoom out to full size

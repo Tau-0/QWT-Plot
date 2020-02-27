@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-#include <functiontable.h>
+#include "functiontable.h"
 
 using std::string;
 using std::vector;

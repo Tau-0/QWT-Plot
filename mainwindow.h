@@ -9,8 +9,8 @@
 
 #include <memory>
 
-#include <data.h>
-#include <plotter.h>
+#include "data.h"
+#include "plotter.h"
 
 using std::make_unique;
 using std::unique_ptr;
@@ -21,7 +21,7 @@ namespace Ui {
 }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow {
+class MainWindow: public QMainWindow {
     Q_OBJECT
 
 private:
