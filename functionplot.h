@@ -5,7 +5,7 @@
 
 #include <memory>
 
-#include <modifiedcheckbox.h>
+#include "modifiedcheckbox.h"
 
 using std::make_unique;
 using std::unique_ptr;

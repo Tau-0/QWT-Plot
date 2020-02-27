@@ -1,11 +1,11 @@
 #ifndef ZOOMER_H
 #define ZOOMER_H
 
+#include <qwt_plot_zoomer.h>
 
-class Zoomer
-{
+class Zoomer : public QwtPlotZoomer {
 public:
-    Zoomer();
+    Zoomer(QWidget* _canvas);
+    QwtText trackerTextF(const QPointF& pos) const;
 };
-
 #endif // ZOOMER_H
