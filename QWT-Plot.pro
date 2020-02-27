@@ -24,8 +24,7 @@ SOURCES += \
     functionwithintervalsplot.cpp \
     main.cpp \
     mainwindow.cpp \
-    plotter.cpp \
-    zoomer.cpp
+    plotter.cpp
 
 HEADERS += \
     curvedata.h \
@@ -35,8 +34,7 @@ HEADERS += \
     functionwithintervalsplot.h \
     mainwindow.h \
     modifiedcheckbox.h \
-    plotter.h \
-    zoomer.h
+    plotter.h
 
 FORMS += \
     mainwindow.ui

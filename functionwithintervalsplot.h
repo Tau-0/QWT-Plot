@@ -1,7 +1,7 @@
 #ifndef FUNCTIONWITHINTERVALSPLOT_H
 #define FUNCTIONWITHINTERVALSPLOT_H
 
-#include "functionplot.h"
+#include <functionplot.h>
 
 class FunctionWithIntervalsPlot : public FunctionPlot {
 private:

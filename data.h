@@ -3,8 +3,8 @@
 
 #include <vector>
 
-#include "curvedata.h"
-#include "functiontable.h"
+#include <curvedata.h>
+#include <functiontable.h>
 
 using std::vector;
 
