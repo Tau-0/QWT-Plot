@@ -2,13 +2,9 @@
 #define PLOTTER_H
 
 #include <qwt_legend.h>
-#include <qwt_plot.h>
 #include <qwt_plot_grid.h>
 #include <qwt_plot_magnifier.h>
 #include <qwt_plot_panner.h>
-
-#include <memory>
-#include <vector>
 
 #include "curvedata.h"
 #include "functionwithintervalsplot.h"
@@ -22,6 +18,7 @@ using std::vector;
 class Plotter {
 private:
     QwtPlot* source; // Borrow
+    QVBoxLayout* vbox; // Borrow
 
     unique_ptr<QwtPlotGrid> grid;
     unique_ptr<QwtLegend> legend;
@@ -31,7 +28,7 @@ private:
 
     FunctionPlot plot1;
     FunctionPlot plot2;
-    FunctionWithIntervalsPlot plot_fwi1;
+    //FunctionWithIntervalsPlot plot_fwi1;
 
     void set_curve(QwtPlotCurve* curve, const CurveData& curve_data);
     void set_grid();
@@ -41,7 +38,7 @@ private:
     void set_zoomer();
 
 public:
-    Plotter(QwtPlot* _source);
+    Plotter(QwtPlot* _source, QVBoxLayout* _vbox);
 
     void set_function1(const CurveData& curve_data);
     void set_function2(const CurveData& curve_data);

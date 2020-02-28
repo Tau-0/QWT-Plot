@@ -1,26 +1,33 @@
 #ifndef FUNCTIONPLOT_H
 #define FUNCTIONPLOT_H
 
+#include <QCheckBox>
+#include <QObject>
+#include <QVBoxLayout>
+
+#include <qwt_plot.h>
 #include <qwt_plot_curve.h>
 
 #include <memory>
 
-#include "modifiedcheckbox.h"
-
 using std::make_unique;
 using std::unique_ptr;
 
-class FunctionPlot {
+class FunctionPlot : public QObject {
+    Q_OBJECT
 private:
-    unique_ptr<ModifiedCheckBox> checkbox;
+    QwtPlot* source; // Borrow
+    QVBoxLayout* vbox; // Borrow
+    unique_ptr<QCheckBox> checkbox;
     unique_ptr<QwtPlotCurve> curve;
 
+    void set_checkbox();
 public:
-    FunctionPlot();
+    FunctionPlot(QwtPlot* _source, QVBoxLayout* _vbox);
 
-    QwtPlotCurve* get_curve() const {
-        return curve.get();
-    }
+    QCheckBox* get_checkbox() const;
+    QwtPlotCurve* get_curve() const;
+    void process_checkbox();
 };
 
 #endif // FUNCTIONPLOT_H

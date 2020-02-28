@@ -34,7 +34,6 @@ HEADERS += \
     functiontable.h \
     functionwithintervalsplot.h \
     mainwindow.h \
-    modifiedcheckbox.h \
     plotter.h \
     zoomer.h
 

@@ -1,6 +1,7 @@
 #include "plotter.h"
 
-Plotter::Plotter(QwtPlot* _source) : source(_source) {
+Plotter::Plotter(QwtPlot* _source, QVBoxLayout* _vbox) :
+    source(_source), vbox(_vbox), plot1(_source, _vbox), plot2(_source, _vbox) {
     set_grid();
     set_legend();
     set_magnifier();
@@ -20,11 +21,13 @@ void Plotter::set_curve(QwtPlotCurve* curve, const CurveData& curve_data) {
 
 void Plotter::set_function1(const CurveData& curve_data) {
     auto curve = plot1.get_curve();
+    plot1.get_checkbox()->setText(curve_data.get_name().data());
     set_curve(curve, curve_data);
 }
 
 void Plotter::set_function2(const CurveData& curve_data) {
     auto curve = plot2.get_curve();
+    plot2.get_checkbox()->setText(curve_data.get_name().data());
     set_curve(curve, curve_data);
 }
 

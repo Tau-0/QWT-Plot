@@ -21,7 +21,7 @@ namespace Ui {
 }
 QT_END_NAMESPACE
 
-class MainWindow: public QMainWindow {
+class MainWindow : public QMainWindow {
     Q_OBJECT
 
 private:
@@ -32,6 +32,7 @@ private:
     unique_ptr<Data> plotter_data;
 
 protected:
+    QVBoxLayout* get_box_source() const;
     QwtPlot* get_plotter_source() const;
 
 public:
