@@ -4,8 +4,9 @@
 #include <qwt_plot_zoomer.h>
 
 class Zoomer : public QwtPlotZoomer {
-public:
+ public:
     Zoomer(QWidget* _canvas);
     QwtText trackerTextF(const QPointF& pos) const;
 };
+
 #endif // ZOOMER_H

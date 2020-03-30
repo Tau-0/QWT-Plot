@@ -8,10 +8,13 @@
 using std::vector;
 
 class FunctionWithIntervalsPlot : public FunctionPlot {
-private:
+ private:
     vector<unique_ptr<QwtPlotCurve>> fillers;
-public:
+ public:
     FunctionWithIntervalsPlot(QwtPlot* _source, QVBoxLayout* _vbox);
+    const vector<unique_ptr<QwtPlotCurve>>& get_fillers() const;
+    void make_fillers(int n);
+    void process_checkbox();
 };
 
 #endif // FUNCTIONWITHINTERVALSPLOT_H

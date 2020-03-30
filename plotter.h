@@ -6,7 +6,7 @@
 #include <qwt_plot_magnifier.h>
 #include <qwt_plot_panner.h>
 
-#include "curvedata.h"
+#include "functiondata.h"
 #include "functionwithintervalsplot.h"
 #include "functiontable.h"
 #include "zoomer.h"
@@ -16,7 +16,7 @@ using std::unique_ptr;
 using std::vector;
 
 class Plotter {
-private:
+ private:
     QwtPlot* source; // Borrow
     QVBoxLayout* vbox; // Borrow
 
@@ -28,21 +28,22 @@ private:
 
     FunctionPlot plot1;
     FunctionPlot plot2;
-    //FunctionWithIntervalsPlot plot_fwi1;
+    FunctionWithIntervalsPlot plot_fwi1;
 
     void set_curve(QwtPlotCurve* curve, const CurveData& curve_data);
+    void set_filler(QwtPlotCurve* filler, const CurveData& curve_data, const QColor& color);
+    void set_main_curve(QwtPlotCurve* main_curve, const FunctionData& function_data);
+
     void set_grid();
     void set_legend();
     void set_magnifier();
     void set_panner();
     void set_zoomer();
-
-public:
+ public:
     Plotter(QwtPlot* _source, QVBoxLayout* _vbox);
-
-    void set_function1(const CurveData& curve_data);
-    void set_function2(const CurveData& curve_data);
-    void set_function_with_intervals1();
+    void set_function1(const FunctionData& function_data);
+    void set_function2(const FunctionData& function_data);
+    void set_function_with_intervals1(const FunctionData& function_data);
 };
 
 #endif // PLOTTER_H

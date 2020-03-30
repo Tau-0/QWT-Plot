@@ -1,7 +1,7 @@
 #include "plotter.h"
 
 Plotter::Plotter(QwtPlot* _source, QVBoxLayout* _vbox) :
-    source(_source), vbox(_vbox), plot1(_source, _vbox), plot2(_source, _vbox) {
+    source(_source), vbox(_vbox), plot1(_source, _vbox), plot2(_source, _vbox), plot_fwi1(_source, _vbox) {
     set_grid();
     set_legend();
     set_magnifier();
@@ -10,25 +10,54 @@ Plotter::Plotter(QwtPlot* _source, QVBoxLayout* _vbox) :
 }
 
 void Plotter::set_curve(QwtPlotCurve* curve, const CurveData& curve_data) {
-    curve->setRawSamples(curve_data.get_X().data(), curve_data.get_Y().data(), curve_data.get_X().size());
+    curve->setRawSamples(curve_data.get_X().data(),
+                         curve_data.get_Y().data(),
+                         curve_data.get_X().size());
     curve->setRenderHint(QwtPlotItem::RenderAntialiased);
     curve->setStyle(QwtPlotCurve::Lines);
-    curve->setTitle(curve_data.get_name().data());
-    curve->setPen(curve_data.get_color());
     curve->attach(source);
+}
+
+void Plotter::set_filler(QwtPlotCurve* filler, const CurveData& curve_data, const QColor& color) {
+    set_curve(filler, curve_data);
+    filler->setBrush(color);
+    filler->setLegendAttribute(QwtPlotCurve::LegendShowSymbol, true);
+}
+
+void Plotter::set_main_curve(QwtPlotCurve* main_curve, const FunctionData& function_data) {
+    set_curve(main_curve, function_data.get_main_curve());
+    main_curve->setPen(function_data.get_color());
+    main_curve->setTitle(function_data.get_name().data());
+}
+
+void Plotter::set_function1(const FunctionData& function_data) {
+    auto curve = plot1.get_curve();
+    plot1.get_checkbox()->setText(function_data.get_name().data());
+    set_main_curve(curve, function_data);
     source->replot();
 }
 
-void Plotter::set_function1(const CurveData& curve_data) {
-    auto curve = plot1.get_curve();
-    plot1.get_checkbox()->setText(curve_data.get_name().data());
-    set_curve(curve, curve_data);
+void Plotter::set_function2(const FunctionData& function_data) {
+    auto curve = plot2.get_curve();
+    plot2.get_checkbox()->setText(function_data.get_name().data());
+    set_main_curve(curve, function_data);
+    source->replot();
 }
 
-void Plotter::set_function2(const CurveData& curve_data) {
-    auto curve = plot2.get_curve();
-    plot2.get_checkbox()->setText(curve_data.get_name().data());
-    set_curve(curve, curve_data);
+void Plotter::set_function_with_intervals1(const FunctionData& function_data) {
+    auto curve = plot_fwi1.get_curve();
+    plot_fwi1.get_checkbox()->setText(function_data.get_name().data());
+    plot_fwi1.make_fillers(function_data.get_size());
+    set_main_curve(curve, function_data);
+
+    int i = 0;
+    QColor alpha_color{function_data.get_color()};
+    alpha_color.setAlpha(function_data.get_alpha());
+    for (const auto& filler : plot_fwi1.get_fillers()) {
+        set_filler(filler.get(), function_data.get_interval(i++), alpha_color);
+    }
+
+    source->replot();
 }
 
 void Plotter::set_grid() {
@@ -67,4 +96,3 @@ void Plotter::set_zoomer() {
     zoomer->setMousePattern(QwtEventPattern::MouseSelect2, Qt::RightButton, Qt::ControlModifier);
     zoomer->setMousePattern(QwtEventPattern::MouseSelect3, Qt::RightButton);
 }
-

@@ -11,4 +11,3 @@ QwtText Zoomer::trackerTextF(const QPointF& pos) const {
     text.setBackgroundBrush(QBrush(background));
     return text;
 }
-

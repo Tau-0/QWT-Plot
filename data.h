@@ -3,20 +3,18 @@
 
 #include <vector>
 
-#include "curvedata.h"
+#include "functiondata.h"
 #include "functiontable.h"
 
 using std::vector;
 
 class Data {
-private:
-    vector<CurveData> curves;
+ private:
+    vector<FunctionData> curves;
     FunctionTable functions;
-
-public:
+ public:
     Data();
-
-    const CurveData& get_curve(int i) const;
+    const FunctionData& get_curve(int i) const;
 };
 
 #endif // DATA_H

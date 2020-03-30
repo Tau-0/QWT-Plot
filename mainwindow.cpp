@@ -24,4 +24,5 @@ QwtPlot* MainWindow::get_plotter_source() const {
 void MainWindow::run_test() {
     main_plotter->set_function1(plotter_data->get_curve(0));
     main_plotter->set_function2(plotter_data->get_curve(1));
+    main_plotter->set_function_with_intervals1(plotter_data->get_curve(2));
 }

@@ -19,6 +19,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     curvedata.cpp \
     data.cpp \
+    functiondata.cpp \
     functionplot.cpp \
     functiontable.cpp \
     functionwithintervalsplot.cpp \
@@ -30,6 +31,7 @@ SOURCES += \
 HEADERS += \
     curvedata.h \
     data.h \
+    functiondata.h \
     functionplot.h \
     functiontable.h \
     functionwithintervalsplot.h \
