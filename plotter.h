@@ -17,10 +17,10 @@ using std::vector;
 
 class Plotter {
  public:
-   Plotter(QwtPlot* _source, QVBoxLayout* _vbox);
-   void set_function1(const FunctionData& function_data);
-   void set_function2(const FunctionData& function_data);
-   void set_function_with_intervals1(const FunctionData& function_data);
+    Plotter(QwtPlot* _source, QVBoxLayout* _vbox);
+    void set_function1(const FunctionData& function_data);
+    void set_function2(const FunctionData& function_data);
+    void set_function_with_intervals1(const FunctionData& function_data);
  private:
     void set_curve(QwtPlotCurve* curve, const CurveData& curve_data);
     void set_filler(QwtPlotCurve* filler, const CurveData& curve_data, const QColor& color);

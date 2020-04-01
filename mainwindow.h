@@ -24,12 +24,12 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow {
     Q_OBJECT
  public:
-   MainWindow(QWidget* parent = nullptr);
-   ~MainWindow();
-   void run_test();
+    MainWindow(QWidget* parent = nullptr);
+    ~MainWindow();
+    void run_test();
  protected:
-   QVBoxLayout* get_box_source() const;
-   QwtPlot* get_plotter_source() const;
+    QVBoxLayout* get_box_source() const;
+    QwtPlot* get_plotter_source() const;
  private:
     Ui::MainWindow* ui;
     unique_ptr<QVBoxLayout> vbox;

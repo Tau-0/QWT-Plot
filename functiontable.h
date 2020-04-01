@@ -14,9 +14,9 @@ using FunctionName = string;
 
 class FunctionTable {
  public:
-   FunctionTable();
-   FunctionPtr operator[](const FunctionName& name);
-   FunctionPtr operator[](FunctionName&& name);
+    FunctionTable();
+    FunctionPtr operator[](const FunctionName& name);
+    FunctionPtr operator[](FunctionName&& name);
  private:
     map<FunctionName, FunctionPtr> function_map;
 };

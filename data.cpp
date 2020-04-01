@@ -1,18 +1,14 @@
 #include "data.h"
 
 Data::Data() {
-    curves.emplace_back(Qt::red, functions["sin"], 0, "sin(x)");
-    curves.emplace_back(Qt::blue, functions["ln"], 1, "ln(x)");
-    curves.emplace_back(Qt::green, functions["cos"], 2, "cos(x)");
+    double begin = 0.0;
+    double end = 5.0;
+    double step = 0.001;
 
-    curves[0].main_curve.generate_X(0, 5, 0.001);
-    curves[0].main_curve.generate_Y(curves[0].main_curve.X, functions["sin"]);
+    curves.emplace_back(begin, end, step, functions["sin"], "sin(x)", Qt::red);
+    curves.emplace_back(begin, end, step, functions["ln"], "ln(x)", Qt::blue);
+    curves.emplace_back(begin, end, step, functions["cos"], "cos(x)", Qt::green);
 
-    curves[1].main_curve.generate_X(0, 5, 0.001);
-    curves[1].main_curve.generate_Y(curves[1].main_curve.X, functions["ln"]);
-
-    curves[2].main_curve.generate_X(0, 5, 0.001);
-    curves[2].main_curve.generate_Y(curves[2].main_curve.X, functions["cos"]);
     curves[2].create_interval(0, 1);
     curves[2].create_interval(3, 4);
 }

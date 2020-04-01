@@ -16,16 +16,17 @@ using std::vector;
 
 class CurveData {
  public:
-   CurveData() = default;
-   void generate_X(double begin, double end, double step);
-   void generate_Y(const vector<double>& _X, FunctionPtr _function);
-   const vector<double>& get_X() const;
-   const vector<double>& get_Y() const;
+    CurveData() = default;
+    void add_point(double x, double y);
+    void generate(double begin, double end, double step, FunctionPtr function);
+    const vector<double>& get_X() const;
+    const vector<double>& get_Y() const;
  private:
-    friend class Data;
-    friend class FunctionData;
-    vector<double> X;
-    vector<double> Y;
+    void generate_X(double begin, double end, double step);
+    void generate_Y(FunctionPtr function);
+
+    vector<double> X_;
+    vector<double> Y_;
 };
 
 #endif // CURVEDATA_H

@@ -1,33 +1,32 @@
 #ifndef FUNCTIONDATA_H
 #define FUNCTIONDATA_H
 
+#include <memory>
+
 #include "curvedata.h"
 
 class FunctionData {
  public:
-    FunctionData(const QColor& _color, FunctionPtr _function,
-                 int _id, const std::string& _name);
+    FunctionData(double begin, double end, double step, FunctionPtr function,
+                 const std::string& name, const QColor& color);
     void create_interval(double begin, double end);
 
-    int get_alpha() const;
     const QColor& get_color() const;
     FunctionPtr get_function() const;
-    int get_id() const;
     const CurveData& get_interval(int i) const;
     const CurveData& get_main_curve() const;
     const string& get_name() const;
+    int get_opacity() const;
     int get_size() const;
  private:
-   friend class Data;
-   CurveData main_curve;
-   vector<CurveData> intervals;
+    CurveData main_curve_;
+    vector<CurveData> intervals_;
 
-   int alpha = 50;
-   QColor color;
+    QColor color_;
+    int opacity_;
 
-   FunctionPtr function = nullptr;
-   int id = -1;
-   string name;
+    FunctionPtr function_;
+    string name_;
 };
 
 #endif // FUNCTIONDATA_H
