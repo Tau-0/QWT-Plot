@@ -16,7 +16,22 @@ using std::unique_ptr;
 using std::vector;
 
 class Plotter {
+ public:
+   Plotter(QwtPlot* _source, QVBoxLayout* _vbox);
+   void set_function1(const FunctionData& function_data);
+   void set_function2(const FunctionData& function_data);
+   void set_function_with_intervals1(const FunctionData& function_data);
  private:
+    void set_curve(QwtPlotCurve* curve, const CurveData& curve_data);
+    void set_filler(QwtPlotCurve* filler, const CurveData& curve_data, const QColor& color);
+    void set_main_curve(QwtPlotCurve* main_curve, const FunctionData& function_data);
+
+    void set_grid();
+    void set_legend();
+    void set_magnifier();
+    void set_panner();
+    void set_zoomer();
+
     QwtPlot* source; // Borrow
     QVBoxLayout* vbox; // Borrow
 
@@ -29,21 +44,6 @@ class Plotter {
     FunctionPlot plot1;
     FunctionPlot plot2;
     FunctionWithIntervalsPlot plot_fwi1;
-
-    void set_curve(QwtPlotCurve* curve, const CurveData& curve_data);
-    void set_filler(QwtPlotCurve* filler, const CurveData& curve_data, const QColor& color);
-    void set_main_curve(QwtPlotCurve* main_curve, const FunctionData& function_data);
-
-    void set_grid();
-    void set_legend();
-    void set_magnifier();
-    void set_panner();
-    void set_zoomer();
- public:
-    Plotter(QwtPlot* _source, QVBoxLayout* _vbox);
-    void set_function1(const FunctionData& function_data);
-    void set_function2(const FunctionData& function_data);
-    void set_function_with_intervals1(const FunctionData& function_data);
 };
 
 #endif // PLOTTER_H

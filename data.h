@@ -9,12 +9,12 @@
 using std::vector;
 
 class Data {
- private:
-    vector<FunctionData> curves;
-    FunctionTable functions;
  public:
     Data();
     const FunctionData& get_curve(int i) const;
+ private:
+   vector<FunctionData> curves;
+   FunctionTable functions;
 };
 
 #endif // DATA_H

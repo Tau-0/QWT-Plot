@@ -4,17 +4,6 @@
 #include "curvedata.h"
 
 class FunctionData {
- private:
-    friend class Data;
-    CurveData main_curve;
-    vector<CurveData> intervals;
-
-    int alpha = 50;
-    QColor color;
-
-    FunctionPtr function = nullptr;
-    int id = -1;
-    string name;
  public:
     FunctionData(const QColor& _color, FunctionPtr _function,
                  int _id, const std::string& _name);
@@ -28,6 +17,17 @@ class FunctionData {
     const CurveData& get_main_curve() const;
     const string& get_name() const;
     int get_size() const;
+ private:
+   friend class Data;
+   CurveData main_curve;
+   vector<CurveData> intervals;
+
+   int alpha = 50;
+   QColor color;
+
+   FunctionPtr function = nullptr;
+   int id = -1;
+   string name;
 };
 
 #endif // FUNCTIONDATA_H

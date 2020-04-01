@@ -13,12 +13,12 @@ using FunctionPtr = FunctionSignature*;
 using FunctionName = string;
 
 class FunctionTable {
+ public:
+   FunctionTable();
+   FunctionPtr operator[](const FunctionName& name);
+   FunctionPtr operator[](FunctionName&& name);
  private:
     map<FunctionName, FunctionPtr> function_map;
- public:
-    FunctionTable();
-    FunctionPtr operator[](const FunctionName& name);
-    FunctionPtr operator[](FunctionName&& name);
 };
 
 #endif // FUNCTIONTABLE_H

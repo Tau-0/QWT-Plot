@@ -15,6 +15,11 @@ using std::unique_ptr;
 
 class FunctionPlot : public QObject {
     Q_OBJECT
+ public:
+   FunctionPlot(QwtPlot* _source, QVBoxLayout* _vbox);
+   QCheckBox* get_checkbox() const;
+   QwtPlotCurve* get_curve() const;
+   void process_checkbox();
  protected:
     QwtPlot* source; // Borrow
     QVBoxLayout* vbox; // Borrow
@@ -22,11 +27,6 @@ class FunctionPlot : public QObject {
     unique_ptr<QwtPlotCurve> curve;
 
     void set_checkbox();
- public:
-    FunctionPlot(QwtPlot* _source, QVBoxLayout* _vbox);
-    QCheckBox* get_checkbox() const;
-    QwtPlotCurve* get_curve() const;
-    void process_checkbox();
 };
 
 #endif // FUNCTIONPLOT_H

@@ -23,18 +23,18 @@ QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
+ public:
+   MainWindow(QWidget* parent = nullptr);
+   ~MainWindow();
+   void run_test();
+ protected:
+   QVBoxLayout* get_box_source() const;
+   QwtPlot* get_plotter_source() const;
  private:
     Ui::MainWindow* ui;
     unique_ptr<QVBoxLayout> vbox;
     unique_ptr<Plotter> main_plotter;
     unique_ptr<Data> plotter_data;
- protected:
-    QVBoxLayout* get_box_source() const;
-    QwtPlot* get_plotter_source() const;
- public:
-    MainWindow(QWidget* parent = nullptr);
-    ~MainWindow();
-    void run_test();
 };
 
 #endif // MAINWINDOW_H
