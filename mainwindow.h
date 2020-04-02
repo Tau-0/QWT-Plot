@@ -31,10 +31,10 @@ class MainWindow : public QMainWindow {
     QVBoxLayout* get_box_source() const;
     QwtPlot* get_plotter_source() const;
  private:
-    Ui::MainWindow* ui;
-    unique_ptr<QVBoxLayout> vbox;
-    unique_ptr<Plotter> main_plotter;
-    unique_ptr<Data> plotter_data;
+    Ui::MainWindow* ui_;
+    unique_ptr<QVBoxLayout> vbox_;
+    unique_ptr<Plotter> main_plotter_;
+    unique_ptr<Data> plotter_data_;
 };
 
 #endif // MAINWINDOW_H

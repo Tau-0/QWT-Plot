@@ -1,33 +1,33 @@
 #include "functionplot.h"
 
 void FunctionPlot::set_checkbox() {
-    checkbox = make_unique<QCheckBox>();
-    checkbox->setChecked(true);
-    vbox->addWidget(checkbox.get());
-    connect(checkbox.get(), &QCheckBox::stateChanged, this, &FunctionPlot::process_checkbox);
+    checkbox_ = make_unique<QCheckBox>();
+    checkbox_->setChecked(true);
+    vbox_->addWidget(checkbox_.get());
+    connect(checkbox_.get(), &QCheckBox::stateChanged, this, &FunctionPlot::process_checkbox);
 }
 
-FunctionPlot::FunctionPlot(QwtPlot* _source, QVBoxLayout* _vbox) : source(_source), vbox(_vbox) {
+FunctionPlot::FunctionPlot(QwtPlot* source, QVBoxLayout* vbox) : source_(source), vbox_(vbox) {
     set_checkbox();
-    curve = make_unique<QwtPlotCurve>();
+    curve_ = make_unique<QwtPlotCurve>();
 }
 
 QCheckBox* FunctionPlot::get_checkbox() const {
-    return checkbox.get();
+    return checkbox_.get();
 }
 
 QwtPlotCurve* FunctionPlot::get_curve() const {
-    return curve.get();
+    return curve_.get();
 }
 
 void FunctionPlot::process_checkbox() {
     QCheckBox* checkbox = static_cast<QCheckBox*>(sender());
 
     if (checkbox->isChecked()) {
-        curve->show();
+        curve_->show();
     } else {
-        curve->hide();
+        curve_->hide();
     }
 
-    source->replot();
+    source_->replot();
 }

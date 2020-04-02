@@ -1,7 +1,7 @@
 #include "functiontable.h"
 
 FunctionTable::FunctionTable() {
-    function_map = {
+    function_map_ = {
         {"sin", sin},
         {"cos", cos},
         {"e", exp},
@@ -12,9 +12,9 @@ FunctionTable::FunctionTable() {
 }
 
 FunctionPtr FunctionTable::operator[](const FunctionName& name) {
-    return function_map[name];
+    return function_map_[name];
 }
 
 FunctionPtr FunctionTable::operator[](FunctionName&& name) {
-    return function_map[name];
+    return function_map_[name];
 }

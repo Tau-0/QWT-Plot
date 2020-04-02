@@ -18,7 +18,7 @@ class FunctionTable {
     FunctionPtr operator[](const FunctionName& name);
     FunctionPtr operator[](FunctionName&& name);
  private:
-    map<FunctionName, FunctionPtr> function_map;
+    map<FunctionName, FunctionPtr> function_map_;
 };
 
 #endif // FUNCTIONTABLE_H

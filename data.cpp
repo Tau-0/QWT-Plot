@@ -5,22 +5,25 @@ Data::Data() {
     double end = 5.0;
     double step = 0.001;
 
-    plot1_data = make_unique<FunctionData>(begin, end, step, functions["sin"], "sin(x)", Qt::red);
-    plot2_data = make_unique<FunctionData>(begin, end, step, functions["ln"], "ln(x)", Qt::blue);
-    plot_fwi1_data = make_unique<FunctionData>(begin, end, step, functions["cos"], "cos(x)", Qt::green);
+    plot1_data_ = make_unique<FunctionData>(begin, end, step,
+                                            function_table_["sin"], "sin(x)", Qt::red);
+    plot2_data_ = make_unique<FunctionData>(begin, end, step,
+                                            function_table_["ln"], "ln(x)", Qt::blue);
+    plot_fwi1_data_ = make_unique<FunctionData>(begin, end, step,
+                                                function_table_["cos"], "cos(x)", Qt::green);
 
-    plot_fwi1_data->create_interval(0, 1);
-    plot_fwi1_data->create_interval(0.5, 4);
+    plot_fwi1_data_->create_interval(0, 1);
+    plot_fwi1_data_->create_interval(0.5, 4);
 }
 
 const FunctionData& Data::get_plot1_data() const {
-    return *plot1_data;
+    return *plot1_data_;
 }
 
 const FunctionData& Data::get_plot2_data() const {
-    return *plot2_data;
+    return *plot2_data_;
 }
 
 const FunctionData& Data::get_plot_fwi1_data() const {
-    return *plot_fwi1_data;
+    return *plot_fwi1_data_;
 }

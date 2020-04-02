@@ -6,7 +6,7 @@ Zoomer::Zoomer(QWidget* canvas) :  QwtPlotZoomer(canvas) {
 
 QwtText Zoomer::trackerTextF(const QPointF& position) const {
     QColor background(Qt::white);
-    background.setAlpha(k_default_background_alpha);
+    background.setAlpha(k_default_background_alpha_);
     QwtText text = QwtPlotZoomer::trackerTextF(position);
     text.setBackgroundBrush(QBrush(background));
     return text;

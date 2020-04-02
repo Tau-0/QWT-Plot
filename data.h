@@ -18,10 +18,10 @@ class Data {
     const FunctionData& get_plot2_data() const;
     const FunctionData& get_plot_fwi1_data() const;
  private:
-    unique_ptr<FunctionData> plot1_data;
-    unique_ptr<FunctionData> plot2_data;
-    unique_ptr<FunctionData> plot_fwi1_data;
-    FunctionTable functions;
+    unique_ptr<FunctionData> plot1_data_;
+    unique_ptr<FunctionData> plot2_data_;
+    unique_ptr<FunctionData> plot_fwi1_data_;
+    FunctionTable function_table_;
 };
 
 #endif // DATA_H

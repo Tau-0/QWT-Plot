@@ -1,18 +1,19 @@
 #include "functionwithintervalsplot.h"
 
-FunctionWithIntervalsPlot::FunctionWithIntervalsPlot(QwtPlot* _source, QVBoxLayout* _vbox) :
-    FunctionPlot(_source, _vbox) {
-    connect(checkbox.get(), &QCheckBox::stateChanged, this, &FunctionWithIntervalsPlot::process_checkbox);
+FunctionWithIntervalsPlot::FunctionWithIntervalsPlot(QwtPlot* source, QVBoxLayout* vbox) :
+    FunctionPlot(source, vbox) {
+    connect(checkbox_.get(), &QCheckBox::stateChanged,
+            this, &FunctionWithIntervalsPlot::process_checkbox);
 }
 
 const vector<unique_ptr<QwtPlotCurve>>& FunctionWithIntervalsPlot::get_fillers() const {
-    return fillers;
+    return fillers_;
 }
 
 void FunctionWithIntervalsPlot::make_fillers(int n) {
-    fillers.reserve(n);
+    fillers_.reserve(n);
     for (int i = 0; i < n; ++i) {
-        fillers.push_back(make_unique<QwtPlotCurve>());
+        fillers_.push_back(make_unique<QwtPlotCurve>());
     }
 }
 
@@ -20,16 +21,16 @@ void FunctionWithIntervalsPlot::process_checkbox() {
     QCheckBox* checkbox = static_cast<QCheckBox*>(sender());
 
     if (checkbox->isChecked()) {
-        curve->show();
-        for (const auto& filler : fillers) {
+        curve_->show();
+        for (const auto& filler : fillers_) {
             filler->show();
         }
     } else {
-        curve->hide();
-        for (const auto& filler : fillers) {
+        curve_->hide();
+        for (const auto& filler : fillers_) {
             filler->hide();
         }
     }
 
-    source->replot();
+    source_->replot();
 }

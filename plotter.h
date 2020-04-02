@@ -17,7 +17,7 @@ using std::vector;
 
 class Plotter {
  public:
-    Plotter(QwtPlot* _source, QVBoxLayout* _vbox);
+    Plotter(QwtPlot* source, QVBoxLayout* vbox);
     void set_function1(const FunctionData& function_data);
     void set_function2(const FunctionData& function_data);
     void set_function_with_intervals1(const FunctionData& function_data);
@@ -32,18 +32,18 @@ class Plotter {
     void set_panner();
     void set_zoomer();
 
-    QwtPlot* source; // Borrow
-    QVBoxLayout* vbox; // Borrow
+    QwtPlot* source_; // Borrow
+    QVBoxLayout* vbox_; // Borrow
 
-    unique_ptr<QwtPlotGrid> grid;
-    unique_ptr<QwtLegend> legend;
-    unique_ptr<QwtPlotMagnifier> magnifier;
-    unique_ptr<QwtPlotPanner> panner;
-    unique_ptr<Zoomer> zoomer;
+    unique_ptr<QwtPlotGrid> grid_;
+    unique_ptr<QwtLegend> legend_;
+    unique_ptr<QwtPlotMagnifier> magnifier_;
+    unique_ptr<QwtPlotPanner> panner_;
+    unique_ptr<Zoomer> zoomer_;
 
-    FunctionPlot plot1;
-    FunctionPlot plot2;
-    FunctionWithIntervalsPlot plot_fwi1;
+    FunctionPlot plot1_;
+    FunctionPlot plot2_;
+    FunctionWithIntervalsPlot plot_fwi1_;
 };
 
 #endif // PLOTTER_H
