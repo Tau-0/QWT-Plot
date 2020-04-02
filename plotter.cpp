@@ -1,8 +1,10 @@
 #include "plotter.h"
 
-Plotter::Plotter(QwtPlot* source, QVBoxLayout* vbox) :
-    source_(source), vbox_(vbox),
-    plot1_(source, vbox), plot2_(source, vbox), plot_fwi1_(source, vbox) {
+Plotter::Plotter(QwtPlot* source, QVBoxLayout* vbox) : source_(source), vbox_(vbox) {
+    plot1_ = make_unique<FunctionPlot>(source, vbox);
+    plot2_ = make_unique<FunctionPlot>(source, vbox);
+    plot_fwi1_ = make_unique<FunctionWithIntervalsPlot>(source, vbox);
+
     set_grid();
     set_legend();
     set_magnifier();
@@ -32,29 +34,29 @@ void Plotter::set_main_curve(QwtPlotCurve* main_curve, const FunctionData& funct
 }
 
 void Plotter::set_function1(const FunctionData& function_data) {
-    auto curve = plot1_.get_curve();
-    plot1_.get_checkbox()->setText(function_data.get_name().data());
+    auto curve = plot1_->get_curve();
+    plot1_->get_checkbox()->setText(function_data.get_name().data());
     set_main_curve(curve, function_data);
     source_->replot();
 }
 
 void Plotter::set_function2(const FunctionData& function_data) {
-    auto curve = plot2_.get_curve();
-    plot2_.get_checkbox()->setText(function_data.get_name().data());
+    auto curve = plot2_->get_curve();
+    plot2_->get_checkbox()->setText(function_data.get_name().data());
     set_main_curve(curve, function_data);
     source_->replot();
 }
 
 void Plotter::set_function_with_intervals1(const FunctionData& function_data) {
-    auto curve = plot_fwi1_.get_curve();
-    plot_fwi1_.get_checkbox()->setText(function_data.get_name().data());
-    plot_fwi1_.make_fillers(function_data.get_size());
+    auto curve = plot_fwi1_->get_curve();
+    plot_fwi1_->get_checkbox()->setText(function_data.get_name().data());
+    plot_fwi1_->make_fillers(function_data.get_size());
     set_main_curve(curve, function_data);
 
     int i = 0;
     QColor alpha_color{function_data.get_color()};
     alpha_color.setAlpha(function_data.get_interval_opacity());
-    for (const auto& filler : plot_fwi1_.get_fillers()) {
+    for (const auto& filler : plot_fwi1_->get_fillers()) {
         set_filler(filler.get(), function_data.get_interval(i++), alpha_color);
     }
 

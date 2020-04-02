@@ -41,9 +41,9 @@ class Plotter {
     unique_ptr<QwtPlotPanner> panner_;
     unique_ptr<Zoomer> zoomer_;
 
-    FunctionPlot plot1_;
-    FunctionPlot plot2_;
-    FunctionWithIntervalsPlot plot_fwi1_;
+    unique_ptr<FunctionPlot> plot1_;
+    unique_ptr<FunctionPlot> plot2_;
+    unique_ptr<FunctionWithIntervalsPlot> plot_fwi1_;
 };
 
 #endif // PLOTTER_H
