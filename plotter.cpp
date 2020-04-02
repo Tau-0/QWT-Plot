@@ -52,7 +52,7 @@ void Plotter::set_function_with_intervals1(const FunctionData& function_data) {
 
     int i = 0;
     QColor alpha_color{function_data.get_color()};
-    alpha_color.setAlpha(function_data.get_opacity());
+    alpha_color.setAlpha(function_data.get_interval_opacity());
     for (const auto& filler : plot_fwi1.get_fillers()) {
         set_filler(filler.get(), function_data.get_interval(i++), alpha_color);
     }

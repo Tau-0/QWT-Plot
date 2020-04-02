@@ -14,16 +14,16 @@ class FunctionData {
     const QColor& get_color() const;
     FunctionPtr get_function() const;
     const CurveData& get_interval(int i) const;
+    int get_interval_opacity() const;
     const CurveData& get_main_curve() const;
     const string& get_name() const;
-    int get_opacity() const;
     int get_size() const;
  private:
     CurveData main_curve_;
     vector<CurveData> intervals_;
 
     QColor color_;
-    int opacity_;
+    int interval_opacity_;
 
     FunctionPtr function_;
     string name_;

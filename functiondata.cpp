@@ -5,7 +5,7 @@ FunctionData::FunctionData(double begin, double end, double step, FunctionPtr fu
     color_ = color;
     function_ = function;
     name_ = name;
-    opacity_ = 50;
+    interval_opacity_ = 50;
     main_curve_.generate(begin, end, step, function);
 }
 
@@ -46,8 +46,8 @@ const string& FunctionData::get_name() const {
     return name_;
 }
 
-int FunctionData::get_opacity() const {
-    return opacity_;
+int FunctionData::get_interval_opacity() const {
+    return interval_opacity_;
 }
 
 int FunctionData::get_size() const {
