@@ -1,13 +1,13 @@
 #include "zoomer.h"
 
-Zoomer::Zoomer(QWidget* _canvas) :  QwtPlotZoomer(_canvas) {
+Zoomer::Zoomer(QWidget* canvas) :  QwtPlotZoomer(canvas) {
     setTrackerMode(AlwaysOn);
 }
 
-QwtText Zoomer::trackerTextF(const QPointF& pos) const {
+QwtText Zoomer::trackerTextF(const QPointF& position) const {
     QColor background(Qt::white);
-    background.setAlpha(200);
-    QwtText text = QwtPlotZoomer::trackerTextF(pos);
+    background.setAlpha(k_default_background_alpha);
+    QwtText text = QwtPlotZoomer::trackerTextF(position);
     text.setBackgroundBrush(QBrush(background));
     return text;
 }
