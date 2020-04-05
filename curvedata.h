@@ -19,6 +19,10 @@ class CurveData {
     CurveData() = default;
     void add_point(double x, double y);
     void generate(double begin, double end, double step, FunctionPtr function);
+
+    size_t data_size() const;
+    const double* data_X() const;
+    const double* data_Y() const;
     const vector<double>& get_X() const;
     const vector<double>& get_Y() const;
  private:

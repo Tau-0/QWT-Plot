@@ -10,6 +10,18 @@ void CurveData::generate(double begin, double end, double step, FunctionPtr func
     generate_Y(function);
 }
 
+size_t CurveData::data_size() const {
+    return X_.size();
+}
+
+const double* CurveData::data_X() const {
+    return X_.data();
+}
+
+const double* CurveData::data_Y() const {
+    return Y_.data();
+}
+
 const vector<double>& CurveData::get_X() const {
     return X_;
 }

@@ -13,9 +13,7 @@ Plotter::Plotter(QwtPlot* source, QVBoxLayout* vbox) : source_(source) {
 }
 
 void Plotter::set_curve(QwtPlotCurve* curve, const CurveData& curve_data) {
-    curve->setRawSamples(curve_data.get_X().data(),
-                         curve_data.get_Y().data(),
-                         curve_data.get_X().size());
+    curve->setRawSamples(curve_data.data_X(), curve_data.data_Y(), curve_data.data_size());
     curve->setRenderHint(QwtPlotItem::RenderAntialiased);
     curve->setStyle(QwtPlotCurve::Lines);
     curve->attach(source_);
