@@ -7,7 +7,7 @@ void FunctionPlot::set_checkbox() {
     connect(checkbox_.get(), &QCheckBox::stateChanged, this, &FunctionPlot::process_checkbox);
 }
 
-FunctionPlot::FunctionPlot(QwtPlot* source, QVBoxLayout* vbox) : source_(source), vbox_(vbox) {
+FunctionPlot::FunctionPlot(QVBoxLayout* vbox) : vbox_(vbox) {
     set_checkbox();
     curve_ = make_unique<QwtPlotCurve>();
 }
@@ -29,5 +29,5 @@ void FunctionPlot::process_checkbox() {
         curve_->hide();
     }
 
-    source_->replot();
+    emit plot_changed();
 }

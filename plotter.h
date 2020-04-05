@@ -1,6 +1,8 @@
 #ifndef PLOTTER_H
 #define PLOTTER_H
 
+#include <QObject>
+
 #include <qwt_legend.h>
 #include <qwt_plot_grid.h>
 #include <qwt_plot_magnifier.h>
@@ -15,12 +17,14 @@ using std::make_unique;
 using std::unique_ptr;
 using std::vector;
 
-class Plotter {
+class Plotter : public QObject {
  public:
     Plotter(QwtPlot* source, QVBoxLayout* vbox);
     void set_function1(const FunctionData& function_data);
     void set_function2(const FunctionData& function_data);
     void set_function_with_intervals1(const FunctionData& function_data);
+ public slots:
+    void replot();
  private:
     void set_curve(QwtPlotCurve* curve, const CurveData& curve_data);
     void set_filler(QwtPlotCurve* filler, const CurveData& curve_data, const QColor& color);

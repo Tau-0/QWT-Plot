@@ -1,7 +1,7 @@
 #include "functionwithintervalsplot.h"
 
-FunctionWithIntervalsPlot::FunctionWithIntervalsPlot(QwtPlot* source, QVBoxLayout* vbox) :
-    FunctionPlot(source, vbox) {
+FunctionWithIntervalsPlot::FunctionWithIntervalsPlot(QVBoxLayout* vbox) :
+    FunctionPlot(vbox) {
     connect(checkbox_.get(), &QCheckBox::stateChanged,
             this, &FunctionWithIntervalsPlot::process_checkbox);
 }
@@ -32,5 +32,5 @@ void FunctionWithIntervalsPlot::process_checkbox() {
         }
     }
 
-    source_->replot();
+    emit plot_changed();
 }

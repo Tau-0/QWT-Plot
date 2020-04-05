@@ -9,7 +9,7 @@ using std::vector;
 
 class FunctionWithIntervalsPlot : public FunctionPlot {
  public:
-    FunctionWithIntervalsPlot(QwtPlot* source, QVBoxLayout* vbox);
+    FunctionWithIntervalsPlot(QVBoxLayout* vbox);
     const vector<unique_ptr<QwtPlotCurve>>& get_fillers() const;
     void make_fillers(int n);
     void process_checkbox();
