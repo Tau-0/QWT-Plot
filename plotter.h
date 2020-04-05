@@ -37,8 +37,6 @@ class Plotter : public QObject {
     void set_zoomer();
 
     QwtPlot* source_; // Borrow
-    QVBoxLayout* vbox_; // Borrow
-
     unique_ptr<QwtPlotGrid> grid_;
     unique_ptr<QwtLegend> legend_;
     unique_ptr<QwtPlotMagnifier> magnifier_;

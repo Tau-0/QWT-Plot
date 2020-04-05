@@ -1,6 +1,6 @@
 #include "plotter.h"
 
-Plotter::Plotter(QwtPlot* source, QVBoxLayout* vbox) : source_(source), vbox_(vbox) {
+Plotter::Plotter(QwtPlot* source, QVBoxLayout* vbox) : source_(source) {
     plot1_ = make_unique<FunctionPlot>(vbox);
     plot2_ = make_unique<FunctionPlot>(vbox);
     plot_fwi1_ = make_unique<FunctionWithIntervalsPlot>(vbox);
@@ -34,35 +34,33 @@ void Plotter::set_main_curve(QwtPlotCurve* main_curve, const FunctionData& funct
 }
 
 void Plotter::set_function1(const FunctionData& function_data) {
-    auto curve = plot1_->get_curve();
     plot1_->get_checkbox()->setText(function_data.get_name().data());
+    set_main_curve(plot1_->get_curve(), function_data);
     connect(plot1_.get(), &FunctionPlot::plot_changed, this, &Plotter::replot);
-    set_main_curve(curve, function_data);
     replot();
 }
 
 void Plotter::set_function2(const FunctionData& function_data) {
-    auto curve = plot2_->get_curve();
     plot2_->get_checkbox()->setText(function_data.get_name().data());
+    set_main_curve(plot2_->get_curve(), function_data);
     connect(plot2_.get(), &FunctionPlot::plot_changed, this, &Plotter::replot);
-    set_main_curve(curve, function_data);
-    source_->replot();
+    replot();
 }
 
 void Plotter::set_function_with_intervals1(const FunctionData& function_data) {
     plot_fwi1_->get_checkbox()->setText(function_data.get_name().data());
-    plot_fwi1_->make_fillers(function_data.get_size());
     set_main_curve(plot_fwi1_->get_curve(), function_data);
     connect(plot_fwi1_.get(), &FunctionPlot::plot_changed, this, &Plotter::replot);
 
     int i = 0;
+    plot_fwi1_->make_fillers(function_data.get_size());
     QColor alpha_color{function_data.get_color()};
     alpha_color.setAlpha(function_data.get_interval_opacity());
     for (const auto& filler : plot_fwi1_->get_fillers()) {
         set_filler(filler.get(), function_data.get_interval(i++), alpha_color);
     }
 
-    source_->replot();
+    replot();
 }
 
 void Plotter::replot() {
