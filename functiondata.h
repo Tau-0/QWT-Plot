@@ -9,22 +9,13 @@ class FunctionData {
  public:
     FunctionData(double begin, double end, double step, FunctionPtr function,
                  const std::string& name, const QColor& color);
-    void create_interval(double begin, double end);
-
     const QColor& get_color() const;
+    const CurveData& get_curve_data() const;
     FunctionPtr get_function() const;
-    const CurveData& get_interval(int i) const;
-    int get_interval_opacity() const;
-    const CurveData& get_main_curve() const;
     const string& get_name() const;
-    int get_size() const;
- private:
-    CurveData main_curve_;
-    vector<CurveData> intervals_;
-
+ protected:
     QColor color_;
-    int interval_opacity_;
-
+    CurveData curve_data_;
     FunctionPtr function_;
     string name_;
 };

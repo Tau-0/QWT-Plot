@@ -8,9 +8,9 @@
 #include <qwt_plot_magnifier.h>
 #include <qwt_plot_panner.h>
 
-#include "functiondata.h"
-#include "functionwithintervalsplot.h"
 #include "functiontable.h"
+#include "functionwithintervalsdata.h"
+#include "functionwithintervalsplot.h"
 #include "zoomer.h"
 
 using std::make_unique;
@@ -22,7 +22,7 @@ class Plotter : public QObject {
     Plotter(QwtPlot* source, QVBoxLayout* vbox);
     void set_function1(const FunctionData& function_data);
     void set_function2(const FunctionData& function_data);
-    void set_function_with_intervals1(const FunctionData& function_data);
+    void set_function_with_intervals1(const FunctionWithIntervalsData& function_data);
  public slots:
     void replot();
  private:

@@ -1,9 +1,11 @@
 QT += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
 CONFIG += c++17
 CONFIG += qwt
+
+QMAKE_CXXFLAGS_WARN_ON += -Wall
+QMAKE_CXXFLAGS_WARN_ON += -Wextra
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -22,6 +24,7 @@ SOURCES += \
     functiondata.cpp \
     functionplot.cpp \
     functiontable.cpp \
+    functionwithintervalsdata.cpp \
     functionwithintervalsplot.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -34,6 +37,7 @@ HEADERS += \
     functiondata.h \
     functionplot.h \
     functiontable.h \
+    functionwithintervalsdata.h \
     functionwithintervalsplot.h \
     mainwindow.h \
     plotter.h \

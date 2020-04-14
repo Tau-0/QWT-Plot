@@ -26,7 +26,7 @@ void Plotter::set_filler(QwtPlotCurve* filler, const CurveData& curve_data, cons
 }
 
 void Plotter::set_main_curve(QwtPlotCurve* main_curve, const FunctionData& function_data) {
-    set_curve(main_curve, function_data.get_main_curve());
+    set_curve(main_curve, function_data.get_curve_data());
     main_curve->setPen(function_data.get_color());
     main_curve->setTitle(function_data.get_name().data());
 }
@@ -45,17 +45,17 @@ void Plotter::set_function2(const FunctionData& function_data) {
     replot();
 }
 
-void Plotter::set_function_with_intervals1(const FunctionData& function_data) {
+void Plotter::set_function_with_intervals1(const FunctionWithIntervalsData& function_data) {
     plot_fwi1_->get_checkbox()->setText(function_data.get_name().data());
     set_main_curve(plot_fwi1_->get_curve(), function_data);
     connect(plot_fwi1_.get(), &FunctionPlot::plot_changed, this, &Plotter::replot);
 
     int i = 0;
-    plot_fwi1_->make_fillers(function_data.get_size());
+    plot_fwi1_->make_fillers(function_data.get_intervals_data_size());
     QColor alpha_color{function_data.get_color()};
-    alpha_color.setAlpha(function_data.get_interval_opacity());
+    alpha_color.setAlpha(function_data.get_intervals_opacity());
     for (const auto& filler : plot_fwi1_->get_fillers()) {
-        set_filler(filler.get(), function_data.get_interval(i++), alpha_color);
+        set_filler(filler.get(), function_data.get_interval_data(i++), alpha_color);
     }
 
     replot();
