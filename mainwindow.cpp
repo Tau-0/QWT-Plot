@@ -3,8 +3,6 @@
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui_(new Ui::MainWindow) {
     ui_->setupUi(this);
-    vbox_ = make_unique<QVBoxLayout>();
-    ui_->box->setLayout(vbox_.get());
     main_plotter_ = make_unique<Plotter>(get_plotter_source(), get_box_source());
     plotter_data_ = make_unique<Data>();
 }
@@ -14,7 +12,7 @@ MainWindow::~MainWindow() {
 }
 
 QVBoxLayout* MainWindow::get_box_source() const {
-    return vbox_.get();
+    return ui_->verticalLayout_1;
 }
 
 QwtPlot* MainWindow::get_plotter_source() const {
