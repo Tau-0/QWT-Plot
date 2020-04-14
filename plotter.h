@@ -26,10 +26,6 @@ class Plotter : public QObject {
  public slots:
     void replot();
  private:
-    void set_curve(QwtPlotCurve* curve, const CurveData& curve_data);
-    void set_filler(QwtPlotCurve* filler, const CurveData& curve_data, const QColor& color);
-    void set_main_curve(QwtPlotCurve* main_curve, const FunctionData& function_data);
-
     void set_grid();
     void set_legend();
     void set_magnifier();

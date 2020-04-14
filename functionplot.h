@@ -10,6 +10,8 @@
 
 #include <memory>
 
+#include "functiondata.h"
+
 using std::make_unique;
 using std::unique_ptr;
 
@@ -18,16 +20,17 @@ class FunctionPlot : public QObject {
  public:
     FunctionPlot(QVBoxLayout* vbox);
     QCheckBox* get_checkbox() const;
-    QwtPlotCurve* get_curve() const;
-    void process_checkbox();
+    QwtPlotCurve* get_qwt_curve() const;
+    void set_function_plot(QwtPlot* source, const FunctionData& function_data);
  signals:
     void plot_changed();
  protected:
-    QVBoxLayout* vbox_; // Borrow
-    unique_ptr<QCheckBox> checkbox_;
-    unique_ptr<QwtPlotCurve> curve_;
+    void process_checkbox();
+    void set_checkbox(QVBoxLayout* vbox);
+    void set_qwt_curve(QwtPlot* source, const CurveData& curve_data);
 
-    void set_checkbox();
+    unique_ptr<QCheckBox> checkbox_;
+    unique_ptr<QwtPlotCurve> qwt_curve_;
 };
 
 #endif // FUNCTIONPLOT_H

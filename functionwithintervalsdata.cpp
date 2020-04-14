@@ -26,10 +26,11 @@ const CurveData& FunctionWithIntervalsData::get_interval_data(size_t i) const {
     return intervals_data_[i];
 }
 
+size_t FunctionWithIntervalsData::get_intervals_data_size() const {
+    return intervals_data_.size();
+}
+
 int FunctionWithIntervalsData::get_intervals_opacity() const {
     return k_intervals_opacity_;
 }
 
-size_t FunctionWithIntervalsData::get_intervals_data_size() const {
-    return intervals_data_.size();
-}

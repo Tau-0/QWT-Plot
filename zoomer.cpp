@@ -1,6 +1,6 @@
 #include "zoomer.h"
 
-Zoomer::Zoomer(QWidget* canvas) :  QwtPlotZoomer(canvas) {
+Zoomer::Zoomer(QWidget* canvas) : QwtPlotZoomer(canvas) {
     setTrackerMode(AlwaysOn);
 }
 
