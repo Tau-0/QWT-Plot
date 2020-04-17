@@ -6,7 +6,7 @@ FunctionWithIntervalsPlot::FunctionWithIntervalsPlot(QVBoxLayout* vbox) :
             this, &FunctionWithIntervalsPlot::process_checkbox);
 }
 
-const vector<unique_ptr<QwtPlotCurve>>& FunctionWithIntervalsPlot::get_qwt_intervals() const {
+const std::vector<std::unique_ptr<QwtPlotCurve>>& FunctionWithIntervalsPlot::get_qwt_intervals() const {
     return qwt_intervals_;
 }
 
@@ -37,12 +37,14 @@ void FunctionWithIntervalsPlot::process_checkbox() {
 void FunctionWithIntervalsPlot::resize_qwt_intervals(size_t n) {
     qwt_intervals_.reserve(n);
     for (size_t i = 0; i < n; ++i) {
-        qwt_intervals_.push_back(make_unique<QwtPlotCurve>());
+        qwt_intervals_.push_back(std::make_unique<QwtPlotCurve>());
     }
 }
 
-void FunctionWithIntervalsPlot::set_qwt_interval(size_t i, QwtPlot* source, const CurveData& interval_data, const QColor& color) {
-    qwt_intervals_[i]->setRawSamples(interval_data.data_X(), interval_data.data_Y(), interval_data.data_size());
+void FunctionWithIntervalsPlot::set_qwt_interval(size_t i, QwtPlot* source,
+                                        const CurveData& interval_data, const QColor& color) {
+    qwt_intervals_[i]->setRawSamples(interval_data.data_X(), interval_data.data_Y(),
+                                     interval_data.data_size());
     qwt_intervals_[i]->setBrush(color);
     qwt_intervals_[i]->setLegendAttribute(QwtPlotCurve::LegendShowSymbol, true);
     qwt_intervals_[i]->attach(source);

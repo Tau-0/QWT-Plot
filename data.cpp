@@ -5,11 +5,11 @@ Data::Data() {
     double end = 5.0;
     double step = 0.001;
 
-    plot1_data_ = make_unique<FunctionData>(begin, end, step,
+    plot1_data_ = std::make_unique<FunctionData>(begin, end, step,
                                             function_table_["sin"], "sin(x)", Qt::red);
-    plot2_data_ = make_unique<FunctionData>(begin, end, step,
+    plot2_data_ = std::make_unique<FunctionData>(begin, end, step,
                                             function_table_["ln"], "ln(x)", Qt::blue);
-    plot_fwi1_data_ = make_unique<FunctionWithIntervalsData>(begin, end, step,
+    plot_fwi1_data_ = std::make_unique<FunctionWithIntervalsData>(begin, end, step,
                                                 function_table_["cos"], "cos(x)", Qt::green);
 
     plot_fwi1_data_->create_interval_data(0, 1);

@@ -5,12 +5,9 @@
 #include <map>
 #include <string>
 
-using std::map;
-using std::string;
-
 using FunctionSignature = double(double);
 using FunctionPtr = FunctionSignature*;
-using FunctionName = string;
+using FunctionName = std::string;
 
 class FunctionTable {
  public:
@@ -18,7 +15,7 @@ class FunctionTable {
     FunctionPtr operator[](const FunctionName& name);
     FunctionPtr operator[](FunctionName&& name);
  private:
-    map<FunctionName, FunctionPtr> function_map_;
+    std::map<FunctionName, FunctionPtr> function_map_;
 };
 
 #endif // FUNCTIONTABLE_H

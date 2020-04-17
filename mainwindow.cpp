@@ -3,8 +3,8 @@
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui_(new Ui::MainWindow) {
     ui_->setupUi(this);
-    main_plotter_ = make_unique<Plotter>(get_plotter_source(), get_box_source());
-    plotter_data_ = make_unique<Data>();
+    main_plotter_ = std::make_unique<Plotter>(get_plotter_source(), get_box_source());
+    plotter_data_ = std::make_unique<Data>();
 }
 
 MainWindow::~MainWindow() {

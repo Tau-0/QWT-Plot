@@ -18,7 +18,7 @@ FunctionPtr FunctionData::get_function() const {
     return function_;
 }
 
-const string& FunctionData::get_name() const {
+const std::string& FunctionData::get_name() const {
     return name_;
 }
 

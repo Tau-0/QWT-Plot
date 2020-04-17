@@ -2,7 +2,7 @@
 
 FunctionPlot::FunctionPlot(QVBoxLayout* vbox) {
     set_checkbox(vbox);
-    qwt_curve_ = make_unique<QwtPlotCurve>();
+    qwt_curve_ = std::make_unique<QwtPlotCurve>();
 }
 
 QCheckBox* FunctionPlot::get_checkbox() const {
@@ -37,7 +37,7 @@ void FunctionPlot::process_checkbox() {
 }
 
 void FunctionPlot::set_checkbox(QVBoxLayout* vbox) {
-    checkbox_ = make_unique<QCheckBox>();
+    checkbox_ = std::make_unique<QCheckBox>();
     checkbox_->hide();
     vbox->addWidget(checkbox_.get());
     connect(checkbox_.get(), &QCheckBox::stateChanged, this, &FunctionPlot::process_checkbox);

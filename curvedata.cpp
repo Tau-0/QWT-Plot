@@ -22,16 +22,16 @@ const double* CurveData::data_Y() const {
     return Y_.data();
 }
 
-const vector<double>& CurveData::get_X() const {
+const std::vector<double>& CurveData::get_X() const {
     return X_;
 }
 
-const vector<double>& CurveData::get_Y() const {
+const std::vector<double>& CurveData::get_Y() const {
     return Y_;
 }
 
 void CurveData::generate_X(double begin, double end, double step) {
-    size_t sample_size = static_cast<size_t>(abs(end - begin) / step);
+    size_t sample_size = static_cast<size_t>(std::abs(end - begin) / step);
     X_.reserve(sample_size);
 
     for (size_t i = 0; i < sample_size; ++i) {

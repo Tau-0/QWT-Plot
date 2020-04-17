@@ -8,12 +8,7 @@
 #include <qwt_plot.h>
 #include <qwt_plot_curve.h>
 
-#include <memory>
-
-#include "functiondata.h"
-
-using std::make_unique;
-using std::unique_ptr;
+#include "data.h"
 
 class FunctionPlot : public QObject {
     Q_OBJECT
@@ -29,8 +24,8 @@ class FunctionPlot : public QObject {
     void set_checkbox(QVBoxLayout* vbox);
     void set_qwt_curve(QwtPlot* source, const CurveData& curve_data);
 
-    unique_ptr<QCheckBox> checkbox_;
-    unique_ptr<QwtPlotCurve> qwt_curve_;
+    std::unique_ptr<QCheckBox> checkbox_;
+    std::unique_ptr<QwtPlotCurve> qwt_curve_;
 };
 
 #endif // FUNCTIONPLOT_H

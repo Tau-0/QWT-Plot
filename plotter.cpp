@@ -1,9 +1,9 @@
 #include "plotter.h"
 
 Plotter::Plotter(QwtPlot* source, QVBoxLayout* vbox) : source_(source) {
-    plot1_ = make_unique<FunctionPlot>(vbox);
-    plot2_ = make_unique<FunctionPlot>(vbox);
-    plot_fwi1_ = make_unique<FunctionWithIntervalsPlot>(vbox);
+    plot1_ = std::make_unique<FunctionPlot>(vbox);
+    plot2_ = std::make_unique<FunctionPlot>(vbox);
+    plot_fwi1_ = std::make_unique<FunctionWithIntervalsPlot>(vbox);
 
     connect(plot1_.get(), &FunctionPlot::plot_changed, this, &Plotter::replot);
     connect(plot2_.get(), &FunctionPlot::plot_changed, this, &Plotter::replot);
@@ -33,7 +33,7 @@ void Plotter::replot() {
 }
 
 void Plotter::set_grid() {
-    grid_ = make_unique<QwtPlotGrid>();
+    grid_ = std::make_unique<QwtPlotGrid>();
     grid_->enableXMin(true);
     grid_->enableYMin(true);
     grid_->setMajorPen(QPen(Qt::black, 0, Qt::DotLine));
@@ -42,7 +42,7 @@ void Plotter::set_grid() {
 }
 
 void Plotter::set_legend() {
-    legend_ = make_unique<QwtLegend>();
+    legend_ = std::make_unique<QwtLegend>();
     source_->insertLegend(legend_.get(), QwtPlot::BottomLegend);
     source_->setCanvasBackground(Qt::white);
     source_->setAxisTitle(QwtPlot::xBottom, "X");
@@ -51,18 +51,18 @@ void Plotter::set_legend() {
 }
 
 void Plotter::set_magnifier() {
-    magnifier_ = make_unique<QwtPlotMagnifier>(source_->canvas());
+    magnifier_ = std::make_unique<QwtPlotMagnifier>(source_->canvas());
     magnifier_->setMouseButton(Qt::NoButton);
     magnifier_->setWheelModifiers(Qt::ControlModifier);
 }
 
 void Plotter::set_panner() {
-    panner_ = make_unique<QwtPlotPanner>(source_->canvas());
+    panner_ = std::make_unique<QwtPlotPanner>(source_->canvas());
     panner_->setMouseButton(Qt::MidButton);
 }
 
 void Plotter::set_zoomer() {
-    zoomer_ = make_unique<Zoomer>(source_->canvas());
+    zoomer_ = std::make_unique<Zoomer>(source_->canvas());
     zoomer_->setRubberBandPen(QPen(Qt::darkBlue));
     zoomer_->setTrackerPen(QPen(Qt::darkBlue));
     zoomer_->setMousePattern(QwtEventPattern::MouseSelect2, Qt::RightButton, Qt::ControlModifier);

@@ -12,7 +12,7 @@ class FunctionWithIntervalsData : public FunctionData {
     size_t get_intervals_data_size() const;
     int get_intervals_opacity() const;
  private:
-    vector<CurveData> intervals_data_;
+    std::vector<CurveData> intervals_data_;
     static constexpr const int k_intervals_opacity_ = 50;
 };
 

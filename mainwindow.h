@@ -2,18 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QVBoxLayout>
-#include <QWidget>
 
-#include <qwt_plot.h>
-
-#include <memory>
-
-#include "data.h"
 #include "plotter.h"
-
-using std::make_unique;
-using std::unique_ptr;
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -32,9 +22,8 @@ class MainWindow : public QMainWindow {
     QwtPlot* get_plotter_source() const;
  private:
     Ui::MainWindow* ui_;
-    unique_ptr<QVBoxLayout> vbox_;
-    unique_ptr<Plotter> main_plotter_;
-    unique_ptr<Data> plotter_data_;
+    std::unique_ptr<Plotter> main_plotter_;
+    std::unique_ptr<Data> plotter_data_;
 };
 
 #endif // MAINWINDOW_H
