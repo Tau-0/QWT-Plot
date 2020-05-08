@@ -26,6 +26,7 @@ void Plotter::set_function2(const FunctionData& function_data) {
 
 void Plotter::set_function_with_intervals1(const FunctionWithIntervalsData& function_data) {
     plot_fwi1_->set_function_with_intervals_plot(source_, function_data);
+    zoomer_->update_base();
 }
 
 void Plotter::replot() {

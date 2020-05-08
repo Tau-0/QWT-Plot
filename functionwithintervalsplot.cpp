@@ -46,7 +46,7 @@ void FunctionWithIntervalsPlot::set_qwt_interval(size_t i, QwtPlot* source,
     qwt_intervals_[i]->setRawSamples(interval_data.data_X(), interval_data.data_Y(),
                                      interval_data.data_size());
     qwt_intervals_[i]->setBrush(color);
-    qwt_intervals_[i]->setLegendAttribute(QwtPlotCurve::LegendShowSymbol, true);
+    qwt_intervals_[i]->setItemAttribute(QwtPlotItem::Legend, false);
     qwt_intervals_[i]->attach(source);
 }
 

@@ -11,3 +11,7 @@ QwtText Zoomer::trackerTextF(const QPointF& position) const {
     text.setBackgroundBrush(QBrush(background));
     return text;
 }
+
+void Zoomer::update_base() {
+    setZoomBase(scaleRect());
+}
