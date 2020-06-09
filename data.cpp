@@ -12,8 +12,12 @@ Data::Data() {
     plot_fwi1_data_ = std::make_unique<FunctionWithIntervalsData>(begin, end, step,
                                                 function_table_["cos"], "cos(x)", Qt::green);
 
-    plot_fwi1_data_->create_interval_data(0, 1);
-    plot_fwi1_data_->create_interval_data(0.5, 4);
+    double interval_1_begin = 0;
+    double interval_1_end = 1;
+    double interval_2_begin = 0.5;
+    double interval_2_end = 4;
+    plot_fwi1_data_->create_interval_data(interval_1_begin, interval_1_end);
+    plot_fwi1_data_->create_interval_data(interval_2_begin, interval_2_end);
 }
 
 const FunctionData& Data::get_plot1_data() const {
