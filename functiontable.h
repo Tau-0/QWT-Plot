@@ -1,20 +1,21 @@
-// For tests.
-
 #ifndef FUNCTIONTABLE_H
 #define FUNCTIONTABLE_H
 
 #include <cmath>
+#include <map>
 #include <string>
 
-using std::string;
+using FunctionSignature = double(double);
+using FunctionPtr = FunctionSignature*;
+using FunctionName = std::string;
 
-typedef double (*funcptr_t)(double);
-
-struct FT {
-    funcptr_t function = NULL;
-    string name;
+class FunctionTable {
+ public:
+    FunctionTable();
+    FunctionPtr operator[](const FunctionName& name);
+    FunctionPtr operator[](FunctionName&& name);
+ private:
+    std::map<FunctionName, FunctionPtr> function_map_;
 };
-
-funcptr_t search_function(const string& name);
 
 #endif // FUNCTIONTABLE_H
